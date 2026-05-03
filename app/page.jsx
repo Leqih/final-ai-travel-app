@@ -1,5 +1,5 @@
-import { HomeClient } from "@/components/HomeClient";
+import { redirect } from "next/navigation";
 
-export default function HomePage() {
-  return <HomeClient />;
+export default function RootPage() {
+  redirect("/splash");
 }

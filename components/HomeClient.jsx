@@ -256,7 +256,7 @@ export function HomeClient() {
           <div className="hp-topbar">
             <div className="hp-topbar-left">
               <div className="hp-hey-row">
-                <span className="hp-wave">👋</span>
+                <span className="hp-wave" style={{ cursor: "pointer" }} onClick={() => router.push("/login")}>👋</span>
                 <span className="hp-hey">Hey Leqi</span>
               </div>
               <div className="hp-greeting">Good <strong>{greeting}</strong></div>
