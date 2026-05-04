@@ -1812,23 +1812,25 @@ function ManualPlanInner() {
             <div style={{ height: 72 }} />
           </div>
 
-          {/* Floating "+ Add to Trip" pill — bottom-right, over content, same pattern as NearbyPage */}
-          <button
-            onClick={() => router.push("/trips")}
-            style={{
-              position: "absolute", bottom: 20, right: 16,
-              height: 40, borderRadius: 20, border: "none", cursor: "pointer",
-              padding: "0 18px",
-              background: "#fff",
-              color: "#111",
-              fontSize: 14, fontWeight: 700,
-              display: "flex", alignItems: "center", gap: 6,
-              boxShadow: "0 4px 16px rgba(0,0,0,0.35)",
-              zIndex: 10,
-              fontFamily: `-apple-system, "SF Pro Display", "Helvetica Neue", sans-serif`,
-            }}>
-            + Add to Trip
-          </button>
+          {/* Floating "+ Add to Trip" pill — only for new trips not yet in My Trips */}
+          {!paramId && (
+            <button
+              onClick={() => router.push("/trips")}
+              style={{
+                position: "absolute", bottom: 20, right: 16,
+                height: 40, borderRadius: 20, border: "none", cursor: "pointer",
+                padding: "0 18px",
+                background: "#fff",
+                color: "#111",
+                fontSize: 14, fontWeight: 700,
+                display: "flex", alignItems: "center", gap: 6,
+                boxShadow: "0 4px 16px rgba(0,0,0,0.35)",
+                zIndex: 10,
+                fontFamily: `-apple-system, "SF Pro Display", "Helvetica Neue", sans-serif`,
+              }}>
+              + Add to Trip
+            </button>
+          )}
         </div>
       </div>
 
