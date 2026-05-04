@@ -1065,26 +1065,36 @@ export default function ProfilePage() {
         const EMOJIS = ["😀","😂","🥹","😍","🤩","😎","🥸","🤓","😏","😌","🥳","🤗","😇","🫡","🤔","😴","🥰","😋","🤪","😜","🫠","🤭","😤","🫨","🤯","🥺","😭","😱","🤠","👻","💀","🤖","👾","🐶","🐱","🐼","🐨","🦊","🐯","🦁","🐸","🦋","🐙","🦄","🐲","🌈","🌸","⭐","🔥","💎","🎸","🎮","🚀","🍕","🍣","🧋"];
         const EMOJI_BG = ["#FFD93D","#FF6B6B","#4ECDC4","#A8E6CF","#FFB347","#C3B1E1","#87CEEB","#F0E68C","#98FB98","#DDA0DD","#F08080","#B0E0E6","#FFDAB9","#E0BBE4","#957DAD","#D4A5A5","#9EC1A3","#CFE2F3","#F9C784","#FC8EAC","#A8DADC","#F7B2BD","#B5EAD7","#C7CEEA","#E2F0CB","#FFDFD3","#D4E6F1","#F9EBEA","#E8F8F5","#FEF9E7","#F4ECF7","#EBF5FB","#E9F7EF","#FDFEFE","#F8F9FA","#EEF2FF","#FFF0F3","#F0FDF4","#FFFBEB","#FFF7ED","#FDF4FF","#ECFDF5","#EFF6FF","#FEF2F2","#F0F9FF","#FAFAF9","#F9F9F9","#FDFDEA","#F0FFF4","#FFFDE7","#FFF8F1","#FBF5F5","#F5F0FF","#EDFCF2","#F6FFF8"];
         const selectAvatar = id => { setSelectedMemoji(id); localStorage.setItem("opal_memoji", id); setMemojiPickerOpen(false); };
-        const MemojiBtn = ({ id }) => (
-          <button onClick={() => selectAvatar(id)} style={{
-            padding: 0, border: "none", cursor: "pointer", borderRadius: "50%",
-            background: id === selectedMemoji ? "rgba(255,255,255,0.15)" : "transparent",
-            outline: id === selectedMemoji ? "2px solid rgba(255,255,255,0.7)" : "none",
-            outlineOffset: 2, width: "100%", aspectRatio: "1/1", overflow: "hidden",
-          }}>
-            <img src={`/memojis/${id}.png`} alt="memoji" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
-          </button>
-        );
-        const EmojiBtn = ({ emoji, idx }) => {
-          const id = `e:${emoji}`;
+        const MemojiBtn = ({ id }) => {
+          const isSelected = id === selectedMemoji;
           return (
             <button onClick={() => selectAvatar(id)} style={{
               padding: 0, border: "none", cursor: "pointer", borderRadius: "50%",
-              outline: id === selectedMemoji ? "2px solid rgba(255,255,255,0.7)" : "none",
-              outlineOffset: 2, width: "100%", aspectRatio: "1/1", overflow: "hidden",
+              background: "transparent",
+              width: "100%", aspectRatio: "1/1", overflow: "visible",
+              position: "relative", flexShrink: 0,
+              transform: isSelected ? "scale(1.12)" : "scale(1)",
+              transition: "transform 0.2s cubic-bezier(0.34,1.56,0.64,1)",
+              boxShadow: isSelected ? "0 0 0 3px #ff8c42, 0 4px 16px rgba(255,140,66,0.55)" : "none",
+              borderRadius: "50%",
+            }}>
+              <img src={`/memojis/${id}.png`} alt="memoji" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block", borderRadius: "50%" }} />
+            </button>
+          );
+        };
+        const EmojiBtn = ({ emoji, idx }) => {
+          const id = `e:${emoji}`;
+          const isSelected = id === selectedMemoji;
+          return (
+            <button onClick={() => selectAvatar(id)} style={{
+              padding: 0, border: "none", cursor: "pointer", borderRadius: "50%",
+              width: "100%", aspectRatio: "1/1", overflow: "hidden",
               background: EMOJI_BG[idx % EMOJI_BG.length],
               display: "flex", alignItems: "center", justifyContent: "center",
               fontSize: "min(7vw, 32px)",
+              transform: isSelected ? "scale(1.12)" : "scale(1)",
+              transition: "transform 0.2s cubic-bezier(0.34,1.56,0.64,1)",
+              boxShadow: isSelected ? "0 0 0 3px #ff8c42, 0 4px 16px rgba(255,140,66,0.55)" : "none",
             }}>
               {emoji}
             </button>
