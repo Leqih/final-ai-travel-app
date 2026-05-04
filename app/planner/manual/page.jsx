@@ -435,6 +435,7 @@ function ManualPlanInner() {
   const [durationPickerOpen, setDurationPickerOpen] = useState(false);
   const [tripId]      = useState(() => paramId || `trip_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`);
   const [loadDone,    setLoadDone]    = useState(!paramId); // false for existing trips (load from localStorage), true for new trips
+  const [alreadyInMyTrips, setAlreadyInMyTrips] = useState(!!paramId);
 
   const numDays = parseInt(duration) || 3;
   const [tripTitle,     setTripTitle]     = useState("");          // custom title; empty = auto-generated
@@ -745,6 +746,7 @@ function ManualPlanInner() {
       if (idx >= 0) trips[idx] = trip;
       else trips.unshift(trip);
       localStorage.setItem("opal_trips", JSON.stringify(trips));
+      setAlreadyInMyTrips(true);
     } catch (_) {}
   }, [activities, expenses, budget, tripId, destination, duration, prefs, tripStartDate, tripEndDate, loadDone, tripTitle]);
 
@@ -1812,8 +1814,8 @@ function ManualPlanInner() {
             <div style={{ height: 72 }} />
           </div>
 
-          {/* Floating "+ Add to Trip" pill — only for new trips not yet in My Trips */}
-          {!paramId && (
+          {/* Floating "+ Add to Trip" pill — only before the trip is saved to My Trips */}
+          {!alreadyInMyTrips && (
             <button
               onClick={() => router.push("/trips")}
               style={{
