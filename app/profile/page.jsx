@@ -342,17 +342,91 @@ const glass = {
   WebkitBackdropFilter: "blur(8px)",
 };
 
+/* ── Bauhaus / geometric SVG icons for achievements (uniform scale, no stretch) ── */
+const ACHIEVEMENT_ICONS = {
+  wanderer: (
+    <svg viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ width: "100%", height: "100%" }}>
+      {[0,1,2,3,4,5,6,7].map(i => {
+        const a = (i / 8) * Math.PI * 2 - Math.PI / 2;
+        const a2 = ((i + 0.5) / 8) * Math.PI * 2 - Math.PI / 2;
+        const x1 = 26 + Math.cos(a) * 19, y1 = 26 + Math.sin(a) * 19;
+        const x2 = 26 + Math.cos(a2) * 9, y2 = 26 + Math.sin(a2) * 9;
+        return <polygon key={i} points={`26,26 ${x1},${y1} ${x2},${y2}`} fill="white" fillOpacity="0.9" />;
+      })}
+    </svg>
+  ),
+  explorer: (
+    <svg viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ width: "100%", height: "100%" }}>
+      <path d="M8 38 A18 18 0 0 1 44 38" stroke="white" strokeWidth="3.5" strokeLinecap="round"/>
+      <path d="M13 38 A13 13 0 0 1 39 38" stroke="white" strokeWidth="3.5" strokeLinecap="round"/>
+      <path d="M18 38 A8 8 0 0 1 34 38" stroke="white" strokeWidth="3.5" strokeLinecap="round"/>
+      <circle cx="26" cy="38" r="2.5" fill="white"/>
+    </svg>
+  ),
+  adventurer: (
+    <svg viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ width: "100%", height: "100%" }}>
+      <polygon points="26,7 47,45 5,45" fill="white" fillOpacity="0.9"/>
+      <polygon points="26,19 37,41 15,41" fill="rgba(0,0,0,0.18)"/>
+    </svg>
+  ),
+  voyager: (
+    <svg viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ width: "100%", height: "100%" }}>
+      <rect x="26" y="5" width="29" height="29" rx="3" transform="rotate(45 26 26)" stroke="white" strokeWidth="3"/>
+      <rect x="26" y="13" width="18" height="18" rx="2" transform="rotate(45 26 26)" fill="white" fillOpacity="0.9"/>
+    </svg>
+  ),
+  worldtrav: (
+    <svg viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ width: "100%", height: "100%" }}>
+      <circle cx="26" cy="26" r="18" stroke="white" strokeWidth="2.5"/>
+      <line x1="26" y1="8" x2="26" y2="44" stroke="white" strokeWidth="2.5"/>
+      <line x1="8" y1="26" x2="44" y2="26" stroke="white" strokeWidth="2.5"/>
+      <ellipse cx="26" cy="26" rx="10" ry="18" stroke="white" strokeWidth="2.5"/>
+      <line x1="9" y1="18" x2="43" y2="18" stroke="white" strokeWidth="2" strokeOpacity="0.6"/>
+      <line x1="9" y1="34" x2="43" y2="34" stroke="white" strokeWidth="2" strokeOpacity="0.6"/>
+    </svg>
+  ),
+  cityhop: (
+    <svg viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ width: "100%", height: "100%" }}>
+      <polygon points="30,5 15,28 25,28 22,47 37,24 27,24" fill="white" fillOpacity="0.9"/>
+    </svg>
+  ),
+  globetrott: (
+    <svg viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ width: "100%", height: "100%" }}>
+      <path d="M7 16 Q17 4 27 16 Q37 28 47 16" stroke="white" strokeWidth="3.5" strokeLinecap="round" fill="none"/>
+      <path d="M7 28 Q17 16 27 28 Q37 40 47 28" stroke="white" strokeWidth="3.5" strokeLinecap="round" fill="none"/>
+      <path d="M7 40 Q17 28 27 40 Q37 52 47 40" stroke="white" strokeWidth="3.5" strokeLinecap="round" fill="none"/>
+    </svg>
+  ),
+  passport: (
+    <svg viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ width: "100%", height: "100%" }}>
+      <polygon points="26,5 31.5,20 48,20 35,29.5 40,46 26,36.5 12,46 17,29.5 4,20 20.5,20" fill="white" fillOpacity="0.9"/>
+    </svg>
+  ),
+  weekaway: (
+    <svg viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ width: "100%", height: "100%" }}>
+      <path d="M26 45 C26 45 7 33 7 18 C7 9 15 5 26 9 C37 5 45 9 45 18 C45 33 26 45 26 45Z" fill="white" fillOpacity="0.9"/>
+      <path d="M26 45 L26 15" stroke="rgba(0,0,0,0.25)" strokeWidth="2" strokeLinecap="round"/>
+      <path d="M26 30 Q33 23 40 22" stroke="rgba(0,0,0,0.2)" strokeWidth="1.5" strokeLinecap="round"/>
+    </svg>
+  ),
+  nomad: (
+    <svg viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ width: "100%", height: "100%" }}>
+      <path d="M33 9 A18 18 0 1 0 33 43 A12 12 0 1 1 33 9Z" fill="white" fillOpacity="0.9"/>
+    </svg>
+  ),
+};
+
 const ALL_TAGS = [
-  { id: "wanderer",   emoji: "🪨", label: "New Wanderer",   hint: "Create your first trip",     ownedPct: 94, glowRaw: "160,160,200", check: s => s.trips >= 0,     progress: s => 1 },
-  { id: "explorer",  emoji: "🌿", label: "Explorer",        hint: "Complete 1 trip",            ownedPct: 78, glowRaw: "50,210,90",   check: s => s.trips >= 1,     progress: s => Math.min(1, s.trips / 1) },
-  { id: "adventurer",emoji: "🔥", label: "Adventurer",      hint: "Complete 3 trips",           ownedPct: 61, glowRaw: "255,140,30",  check: s => s.trips >= 3,     progress: s => Math.min(1, s.trips / 3) },
-  { id: "voyager",   emoji: "💎", label: "Voyager",         hint: "Complete 6 trips",           ownedPct: 44, glowRaw: "80,180,255",  check: s => s.trips >= 6,     progress: s => Math.min(1, s.trips / 6) },
-  { id: "worldtrav", emoji: "🌐", label: "World Traveler",  hint: "Complete 10 trips",          ownedPct: 22, glowRaw: "180,80,240",  check: s => s.trips >= 10,    progress: s => Math.min(1, s.trips / 10) },
-  { id: "cityhop",   emoji: "⚡", label: "City Hopper",     hint: "Visit 3 different cities",   ownedPct: 55, glowRaw: "255,220,0",   check: s => s.cities >= 3,    progress: s => Math.min(1, s.cities / 3) },
-  { id: "globetrott",emoji: "🌊", label: "Globe Trotter",   hint: "Visit 5 different cities",   ownedPct: 33, glowRaw: "80,200,255",  check: s => s.cities >= 5,    progress: s => Math.min(1, s.cities / 5) },
-  { id: "passport",  emoji: "👑", label: "Passport Hunter", hint: "Visit 3 different countries",ownedPct: 38, glowRaw: "255,200,50",  check: s => s.countries >= 3, progress: s => Math.min(1, s.countries / 3) },
-  { id: "weekaway",  emoji: "🍃", label: "Week Away",       hint: "Travel for 7+ days total",   ownedPct: 58, glowRaw: "40,210,100",  check: s => s.days >= 7,      progress: s => Math.min(1, s.days / 7) },
-  { id: "nomad",     emoji: "🌙", label: "Digital Nomad",   hint: "Travel 30+ days total",      ownedPct: 14, glowRaw: "160,100,255", check: s => s.days >= 30,     progress: s => Math.min(1, s.days / 30) },
+  { id: "wanderer",   label: "New Wanderer",   hint: "Create your first trip",     ownedPct: 94, glowRaw: "160,160,200", check: s => s.trips >= 0,     progress: s => 1 },
+  { id: "explorer",  label: "Explorer",        hint: "Complete 1 trip",            ownedPct: 78, glowRaw: "50,210,90",   check: s => s.trips >= 1,     progress: s => Math.min(1, s.trips / 1) },
+  { id: "adventurer",label: "Adventurer",      hint: "Complete 3 trips",           ownedPct: 61, glowRaw: "255,140,30",  check: s => s.trips >= 3,     progress: s => Math.min(1, s.trips / 3) },
+  { id: "voyager",   label: "Voyager",         hint: "Complete 6 trips",           ownedPct: 44, glowRaw: "80,180,255",  check: s => s.trips >= 6,     progress: s => Math.min(1, s.trips / 6) },
+  { id: "worldtrav", label: "World Traveler",  hint: "Complete 10 trips",          ownedPct: 22, glowRaw: "180,80,240",  check: s => s.trips >= 10,    progress: s => Math.min(1, s.trips / 10) },
+  { id: "cityhop",   label: "City Hopper",     hint: "Visit 3 different cities",   ownedPct: 55, glowRaw: "255,220,0",   check: s => s.cities >= 3,    progress: s => Math.min(1, s.cities / 3) },
+  { id: "globetrott",label: "Globe Trotter",   hint: "Visit 5 different cities",   ownedPct: 33, glowRaw: "80,200,255",  check: s => s.cities >= 5,    progress: s => Math.min(1, s.cities / 5) },
+  { id: "passport",  label: "Passport Hunter", hint: "Visit 3 different countries",ownedPct: 38, glowRaw: "255,200,50",  check: s => s.countries >= 3, progress: s => Math.min(1, s.countries / 3) },
+  { id: "weekaway",  label: "Week Away",       hint: "Travel for 7+ days total",   ownedPct: 58, glowRaw: "40,210,100",  check: s => s.days >= 7,      progress: s => Math.min(1, s.days / 7) },
+  { id: "nomad",     label: "Digital Nomad",   hint: "Travel 30+ days total",      ownedPct: 14, glowRaw: "160,100,255", check: s => s.days >= 30,     progress: s => Math.min(1, s.days / 30) },
 ];
 
 function TagDetailPanel({ tag, stats, isActive, onSetActive, onClose }) {
@@ -408,13 +482,13 @@ function TagDetailPanel({ tag, stats, isActive, onSetActive, onClose }) {
             <div style={{ position: "absolute", bottom: "6%", width: 160, height: 36, borderRadius: "50%", background: `rgba(${g},0.22)`, filter: "blur(20px)", pointerEvents: "none" }} />
           </>
         )}
-        <span style={{
-          fontSize: 160, lineHeight: 1, display: "block", position: "relative",
+        <div style={{
+          width: 140, height: 140, position: "relative",
           filter: isUnlocked
             ? `drop-shadow(0 0 40px rgba(${g},0.9)) drop-shadow(0 12px 48px rgba(${g},0.55))`
             : "grayscale(1) brightness(0.28)",
           transform: isUnlocked ? "translateY(-12px)" : "none",
-        }}>{tag.emoji}</span>
+        }}>{ACHIEVEMENT_ICONS[tag.id]}</div>
       </div>
 
       {/* Bottom */}
@@ -528,14 +602,14 @@ function TagLibrarySheet({ open, onClose, stats, displayTagId, onSelectTag }) {
                       {isUnlocked && (
                         <div style={{ position: "absolute", inset: 0, borderRadius: "50%", background: `radial-gradient(circle, rgba(${g},0.28) 0%, transparent 70%)`, filter: "blur(6px)", pointerEvents: "none" }} />
                       )}
-                      <span style={{
-                        fontSize: 44, lineHeight: 1, display: "block", position: "relative",
+                      <div style={{
+                        width: 40, height: 40, position: "relative",
                         filter: isUnlocked
                           ? `drop-shadow(0 2px 10px rgba(${g},0.9))`
                           : "grayscale(1) brightness(0.25)",
                         transform: isUnlocked ? "translateY(-2px)" : "none",
                         transition: "filter 0.2s",
-                      }}>{tag.emoji}</span>
+                      }}>{ACHIEVEMENT_ICONS[tag.id]}</div>
                     </div>
 
                     {/* Progress bar under locked gems */}
@@ -750,10 +824,10 @@ export default function ProfilePage() {
                             width: 52, height: 52, borderRadius: 16,
                             background: isUnlocked ? `rgba(${g},0.13)` : "rgba(255,255,255,0.04)",
                             display: "flex", alignItems: "center", justifyContent: "center",
-                            fontSize: 26,
+                            padding: 10,
                             filter: isUnlocked ? `drop-shadow(0 2px 8px rgba(${g},0.7))` : "grayscale(1) brightness(0.2)",
                             transition: "all 0.2s",
-                          }}>{tag.emoji}</div>
+                          }}>{ACHIEVEMENT_ICONS[tag.id]}</div>
                           {isActive && (
                             <div style={{ position: "absolute", top: 4, right: 4, width: 7, height: 7, borderRadius: "50%", background: "#ff8c42", boxShadow: "0 0 5px rgba(255,140,66,0.9)" }} />
                           )}
