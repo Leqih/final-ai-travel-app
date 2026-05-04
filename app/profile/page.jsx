@@ -760,8 +760,8 @@ export default function ProfilePage() {
               const rank = getRank(trips.length);
               const shownTag = activeTag || ALL_TAGS.find(t => t.label === rank.label) || ALL_TAGS[0];
               return (
-                <button onClick={() => setTagDetail(shownTag)} style={{ all: "unset", display: "inline-flex", alignItems: "center", justifyContent: "center", gap: 4, marginTop: 8, background: "rgba(20,20,20,0.65)", backdropFilter: "blur(8px)", WebkitBackdropFilter: "blur(8px)", borderRadius: 16, padding: "3px 8px", cursor: "pointer" }}>
-                  <span style={{ color: "#fff", fontSize: 11, fontWeight: 600, lineHeight: 1 }}>{shownTag.emoji} {shownTag.label}</span>
+                <button onClick={() => setTagDetail(shownTag)} style={{ all: "unset", display: "inline-flex", alignItems: "center", justifyContent: "center", gap: 4, marginTop: 8, background: "#ff8c42", borderRadius: 16, padding: "3px 10px", cursor: "pointer", boxShadow: "0 2px 8px rgba(255,140,66,0.35)" }}>
+                  <span style={{ color: "#111", fontSize: 11, fontWeight: 700, lineHeight: 1 }}>{shownTag.emoji} {shownTag.label}</span>
                 </button>
               );
             })()}
