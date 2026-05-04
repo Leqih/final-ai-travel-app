@@ -1069,12 +1069,20 @@ function CalendarMonth({ year, month, startDate, endDate, hoveredDate, onDayClic
 }
 
 function DurationSheet({ open, onClose, value, onSelect }) {
-  const today = useMemo(() => startOfDay(new Date()), []);
+  const [today, setToday] = useState(() => startOfDay(new Date(2025, 0, 1)));
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
   const [hoveredDate, setHoveredDate] = useState(null);
-  const [viewYear, setViewYear] = useState(today.getFullYear());
-  const [viewMonth, setViewMonth] = useState(today.getMonth());
+  const [viewYear, setViewYear] = useState(2025);
+  const [viewMonth, setViewMonth] = useState(0);
+
+  // Set real today on client to avoid SSR mismatch
+  useEffect(() => {
+    const t = startOfDay(new Date());
+    setToday(t);
+    setViewYear(t.getFullYear());
+    setViewMonth(t.getMonth());
+  }, []);
 
   useEffect(() => {
     if (open) {

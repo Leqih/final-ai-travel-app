@@ -722,6 +722,7 @@ export default function ProfilePage() {
   });
   const [displayTagId, setDisplayTagId] = useState(null);
   const [tagDetail, setTagDetail] = useState(null);
+  const [tagLibOpen, setTagLibOpen] = useState(false);
 
   useLayoutEffect(() => {
     if (!shellRef.current) return;
@@ -753,9 +754,9 @@ export default function ProfilePage() {
               <span className="hp-hey">My Profile</span>
             </div>
             <div className="hp-greeting">Traveler</div>
-            <div style={{ display: "inline-flex", alignItems: "center", marginTop: 4, background: "#ff8c42", borderRadius: 12, padding: "2px 10px", boxShadow: "0 2px 8px rgba(255,140,66,0.35)" }}>
+            <button onClick={() => setTagLibOpen(true)} style={{ all: "unset", display: "inline-flex", alignItems: "center", marginTop: 4, background: "#ff8c42", borderRadius: 12, padding: "2px 10px", boxShadow: "0 2px 8px rgba(255,140,66,0.35)", cursor: "pointer" }}>
               <span style={{ color: "#111", fontSize: 12, fontWeight: 700, lineHeight: 1.4 }}>Exploring the world ✈️</span>
-            </div>
+            </button>
             {(() => {
               const stats = { trips: trips.length, cities: visitedCities.length, countries: visitedCountries.length, days: totalDays };
               const activeTag = displayTagId ? ALL_TAGS.find(t => t.id === displayTagId) : null;
@@ -1120,6 +1121,14 @@ export default function ProfilePage() {
           onClose={() => setTagDetail(null)}
         />
       )}
+
+      <TagLibrarySheet
+        open={tagLibOpen}
+        onClose={() => setTagLibOpen(false)}
+        stats={{ trips: trips.length, cities: visitedCities.length, countries: visitedCountries.length, days: totalDays }}
+        displayTagId={displayTagId}
+        onSelectTag={id => { setDisplayTagId(id); setTagLibOpen(false); }}
+      />
 
       {/* ── Trip Collection Sheet ── */}
       {mounted && selectedTrip && (
