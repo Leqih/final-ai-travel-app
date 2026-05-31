@@ -298,7 +298,7 @@ export function HomeClient() {
               </div>
               <div className="hp-greeting">Good <strong>{greeting}</strong></div>
             </div>
-            <div className="hp-avatar"><img src="/memojis/10.png" alt="avatar" style={{ width: "100%", height: "100%", objectFit: "cover" }} /></div>
+            <div className="hp-avatar" onClick={() => router.push("/profile")} style={{ cursor: "pointer" }}><img src="/memojis/10.png" alt="avatar" style={{ width: "100%", height: "100%", objectFit: "cover" }} /></div>
           </div>
 
           {/* ── Countdown hero card (expandable) ── */}
